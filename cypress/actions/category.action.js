@@ -12,16 +12,12 @@ export class categoryActions{
         cy.xpath('//*[@id="root"]/div/div/div[2]/div[2]/div[2]/button').click();
     }
 
-    withInvalidData(name, description){
+    withInvalidData(){
         // directing to add category page
         cy.xpath('//*[@id="root"]/div/div/div[1]/div/a[5]/div').click();
         cy.xpath('//*[@id="root"]/div/div/div[2]/div[2]/div[2]/a').click();
 
-        // fill in the fields with invalid data
-        cy.xpath('//*[@id="nama"]').type(name).clear;
-        cy.xpath('//*[@id="deskripsi"]').type(description).clear;
-
-        // save
+        // fill in the fields with invalid data (empty)
         cy.xpath('//*[@id="root"]/div/div/div[2]/div[2]/div[2]/button').click();
     }
 }

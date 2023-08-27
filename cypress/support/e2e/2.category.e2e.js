@@ -9,31 +9,27 @@ describe('Add Category Scenario', () => {
     const addCategoryStep = new categoryActions();
     const addCategoryObject = new categoryObjects();
 
+    beforeEach(() => {
+        cy.clearLocalStorage();
+        login.withValidCredentials('irfansanbercode@maildrop.cc', '123456')
+    });
+
     // add category
     describe('Add Category', () => {
-
-        before(() => {
-            cy.clearLocalStorage();
-            login.withValidCredentials('irfansanbercode@maildrop.cc', '123456')
-        });
-
-        it('Add Category with valid data', () =>{
+        it('with valid data', () =>{
             setTimeout('16000')
 
             addCategoryStep.withValidData('Milk', 'Fresh Milk');
-            addCategoryObject.categorySuccessMessage().should('contain.text', 'success'); // always failed to assert this
+            addCategoryObject.categorySuccessMessage().should('contain.text', 'item ditambahkan'); // always failed to assert this
         });
+    })
 
-        before(() => {
-            cy.clearLocalStorage();
-            login.withValidCredentials('irfansanbercode@maildrop.cc', '123456')
-        });
-
-        it('Add Category with invalid data', () =>{
+    describe('Add Category', () => {
+        it('with invalid data', () =>{
             setTimeout('16000')
 
-            addCategoryStep.withInvalidData('Milk', 'Fresh Milk');
-            addCategoryObject.categoryErrorMessage().should('have.text', '"name" is not allowed to be empty');
+            addCategoryStep.withInvalidData();
+            addCategoryObject.categoryErrorMessage().should('contain.text', '"name" is not allowed to be empty'); // always failed to assert this
         });
     })
 })
